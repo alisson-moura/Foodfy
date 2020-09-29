@@ -72,3 +72,42 @@ header {
   color:var(--link-color);
   text-decoration: none;
 }
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+}
+.form-header button {
+  background: var(--link-color);
+  border-radius: 4px;
+  font-size: 16px;
+  color: #fff;
+  padding: 0 20px;
+  font-weight: bold;
+  height: 30px;
+  cursor: pointer;
+}
+
+.item {
+  margin-bottom: 30px;
+}
+.item input {
+  width: 100%;
+  display: block;
+  background: #fff;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
+.item label {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--font-color);
+}
+.item span {
+  font-size: 16px;
+  font-weight:bold;
+  text-align:right;
+}

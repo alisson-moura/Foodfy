@@ -1,0 +1,23 @@
+{% extends "Admin/layout.njk" %}
+
+{% block content %}
+  <div class="main">
+    <form action="/admin/recipes" method="post">
+      <div class="form-header">
+        <h1>Criando Receita</h1>
+        <button type="submit">Salvar receita</button>
+      </div>
+      <div class="item">
+        <label for="image_recipe">Imagem da receita</label>
+        <input type="URL" placeholder="https://">
+      </div>
+
+      <div class="item">
+        <label for="image_recipe">Ingredientes</label>
+        <input type="text"/>
+        <span>Adicionar novo ingrediente</span>
+      </div>
+
+    </form>
+  </div>
+{% endblock content %}
