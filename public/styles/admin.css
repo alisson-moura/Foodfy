@@ -91,7 +91,8 @@ header {
 .item {
   margin-bottom: 30px;
 }
-.item input {
+.item input, .item textarea {
+  box-sizing: border-box;
   width: 100%;
   display: block;
   background: #fff;
@@ -99,6 +100,8 @@ header {
   border-radius: 4px;
   padding: 10px 20px;
   margin-top: 10px;
+  font-family: 'Roboto';
+  font-size: 14px;
 }
 
 .item label {
@@ -106,8 +109,13 @@ header {
   font-weight: bold;
   color: var(--font-color);
 }
-.item span {
-  font-size: 16px;
+.btn-add {
+  font-size: 12px;
   font-weight:bold;
+  font-family: 'Roboto';
   text-align:right;
+  color: var(--link-color);
+  cursor: pointer;
+  background: none;
+  outline: none;
 }
