@@ -9,4 +9,6 @@ adminRoutes.get('/recipes', recipeController.index);
 adminRoutes.get('/recipes/create', recipeController.create);
 adminRoutes.post('/recipes', recipeController.post);
 
+adminRoutes.get('/recipes/:id', recipeController.show);
+
 module.exports = adminRoutes;

@@ -77,7 +77,7 @@ header {
   display: flex;
   justify-content: space-between;
 }
-.form-header button {
+.form-header button{
   background: var(--link-color);
   border-radius: 4px;
   font-size: 16px;
@@ -86,6 +86,17 @@ header {
   font-weight: bold;
   height: 30px;
   cursor: pointer;
+  text-decoration: none;
+}
+.form-header a {
+  background: var(--link-color);
+  border-radius: 4px;
+  font-size: 16px;
+  color: #fff;
+  padding: 5px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .item {
@@ -118,4 +129,58 @@ header {
   cursor: pointer;
   background: none;
   outline: none;
+}
+
+.form-header h2 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.image-banner {
+  margin-top: 20px;
+  border-radius: 15px;
+  width: 940px;
+  height: 280px;
+  margin-bottom: 46px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.title h1 {
+font-size: 32px;
+margin-bottom: 4px;
+}
+.title p {
+font-size: 20px;
+color: var(--secondary-font-color);
+}
+.details h2 {
+  font-size: 24px;
+  color: #111111;
+  margin-bottom: 20px;
+}
+.details ul {
+ margin-left: 15px;
+ margin-bottom: 40px;
+ transition: display 0.7s;
+ list-style: none;
+}
+.details li {
+  font-size: 18px;
+  line-height: 28px;
+  color:#444444;
+}
+.details ul > li {
+  text-indent: -20px;
+}
+.details ul > li:before {
+  content: '-   ';
+  text-indent: -10px;
+}
+.details p {
+  font-size:18px;
+  line-height: 28px;
+  color:#444444;
 }

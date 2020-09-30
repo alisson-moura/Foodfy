@@ -30,3 +30,13 @@ exports.post = (req, res) => {
     return res.send(data.recipes);
   });
 }
+
+exports.show = (req, res) => {
+  const {id} = req.params;
+
+  const findRecipe = data.recipes.find(recipe => recipe.id === Number(id));
+
+
+
+  return res.render('Admin/show', {recipe: findRecipe});
+}
