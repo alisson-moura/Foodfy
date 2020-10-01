@@ -3,6 +3,7 @@
   --secondary-font-color: #777777;
   --font-color: #111111;
   --link-color: #6558C3;
+  --danger-color: #DC4747;
 }
 
 *{
@@ -75,6 +76,7 @@ header {
 
 .form-header {
   display: flex;
+  flex:1;
   justify-content: space-between;
 }
 .form-header button{
@@ -183,4 +185,16 @@ color: var(--secondary-font-color);
   font-size:18px;
   line-height: 28px;
   color:#444444;
+}
+
+.form-header .delete-btn {
+  background: var(--danger-color);
+  border-radius: 4px;
+  font-size: 16px;
+  color: #fff;
+  padding: 0 20px;
+  font-weight: bold;
+  height: 30px;
+  cursor: pointer;
+  text-decoration: none;
 }

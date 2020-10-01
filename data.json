@@ -14,47 +14,16 @@
       "author": "Alisson Moura"
     },
     {
-      "id": 2,
-      "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/burger.png",
-      "title": "Triplo bacon burger",
-      "ingredients": [
-        "3 kg de carne moída (escolha uma carne magra e macia)"
-      ],
-      "preparation": [
-        "Misture todos os ingredientes muito bem e amasse para que fique tudo muito bem misturado."
-      ],
-      "information": "Faça porções de 90 g a 100 g.",
-      "author": "Alisson Moura"
-    },
-    {
-      "id": 3,
-      "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/burger.png",
-      "title": "Triplo bacon burger",
-      "ingredients": [
-        "3 kg de carne moída (escolha uma carne magra e macia)"
-      ],
-      "preparation": [
-        "Misture todos os ingredientes muito bem e amasse para que fique tudo muito bem misturado."
-      ],
-      "information": "Faça porções de 90 g a 100 g.",
-      "author": "Alisson Moura"
-    },
-    {
       "id": 4,
-      "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/pizza.png",
-      "title": "Pizza 4 estações",
+      "image": "https://rocketseat-cdn.s3-sa-east-1.amazonaws.com/launchbase/receitas/burger.png",
+      "title": "Triplo bacon burger 2",
       "ingredients": [
-        "1 xícara (chá) de leite",
-        "1 ovo",
-        "1 colher (chá) de sal"
+        "3 kg de carne moída (escolha uma carne magra e macia)"
       ],
       "preparation": [
-        "No liquidificador bata o leite, o ovo, o sal, o açúcar, a margarina, a farinha de trigo e o fermento em pó até que tudo esteja encorporado.",
-        "Despeje a massa em uma assadeira para pizza untada com margarina e leve ao forno preaquecido por 20 minutos.",
-        "Retire do forno e despeje o molho de tomate.",
-        "Cubra a massa com mussarela ralada, tomate e orégano a gosto."
+        "Misture todos os ingredientes muito bem e amasse para que fique tudo muito bem misturado."
       ],
-      "information": "Pizza de liquidificador é uma receita deliciosa e supersimples de preparar. Feita toda no liquidificador, ela é bem prática para o dia a dia. Aqui no TudoGostoso você também encontra diversas delícias práticas feitas no liquidificador: massa de panqueca, torta de frango de liquidificador, pão de queijo de liquidificador, bolo de banana, bolo de chocolate e muito mais!",
+      "information": "Faça porções de 90 g a 100 g.",
       "author": "Alisson Moura"
     }
   ]
