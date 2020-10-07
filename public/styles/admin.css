@@ -34,12 +34,30 @@ header {
   max-width: 940px;
   min-height: 100%;
 }
-.main h1{
+
+.header-title {
+  display: flex;
+  margin-bottom: 30px;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-title h1 {
   font-weight: bold;
   font-size: 24px;
   color: var(--font-color);
-  margin-bottom: 30px;
-}  
+}
+
+.header-title a {
+  background: var(--link-color);
+  border-radius: 4px;
+  font-size: 16px;
+  color: #fff;
+  padding: 6px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -67,7 +85,6 @@ header {
   line-height: 28px;
 }
 .card a {
- 
   font-size: 14px;
   font-weight: bold;
   color:var(--link-color);

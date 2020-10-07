@@ -1,0 +1,17 @@
+{% extends "Admin/layout.njk" %}
+
+{% block content %}
+  <div class="main">
+    <form action="/admin/chefs" method="post">
+      <div class="form-header">
+        <h1>Criando Chef</h1>
+        <button type="submit">Salvar chef</button>
+      </div>
+      {%include 'Admin/Chefs/fields.njk' %}
+    </form>
+    {% if error %}
+    <div data-error="{{error}}" class="errorAlert"></div>
+        <script src="/scripts/admin/error.js"></script>
+    {% endif %}
+  </div>
+{% endblock content %}

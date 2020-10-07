@@ -4,7 +4,7 @@ const chefController = require('../app/controllers/Admin/chefController');
 
 const adminRoutes = express.Router();
 
-adminRoutes.get('/', recipeController.index);
+adminRoutes.get('/', (req,res) => (res.redirect('/admin/recipes')));
 adminRoutes.get('/recipes', recipeController.index);
 
 adminRoutes.get('/recipes/create', recipeController.create);
@@ -19,5 +19,8 @@ adminRoutes.delete("/recipes", recipeController.delete);
 
 //chefs
 adminRoutes.get('/chefs', chefController.index);
+
+adminRoutes.get('/chefs/create', chefController.create);
+adminRoutes.post('/chefs', chefController.post);
 
 module.exports = adminRoutes;
