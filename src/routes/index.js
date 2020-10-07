@@ -2,7 +2,7 @@ const express = require('express');
 const adminRoutes = require('./admin');
 
 
-const data = require('../data.json');
+const data = require('../../data.json');
 
 const routes = express.Router();
 

@@ -1,12 +1,12 @@
 const fs = require('fs');
-const data = require('../../data.json');
+const data = require('../../../../data.json');
 
 exports.index = (req, res) => {
   return res.render('Admin/index', { recipes: data.recipes });
 }
 
 exports.create = (req, res) => {
-  return res.render('Admin/create');
+  return res.render('Admin/Recipes/create');
 }
 exports.post = (req, res) => {
   const { image, title, ingredients, preparation, information } = req.body;
@@ -35,14 +35,14 @@ exports.show = (req, res) => {
   const { id } = req.params;
   const findRecipe = data.recipes.find(recipe => recipe.id === Number(id));
   if (!findRecipe) return res.send('Receita não encontrada');
-  return res.render('Admin/show', { recipe: findRecipe });
+  return res.render('Admin/Recipes/show', { recipe: findRecipe });
 }
 
 exports.edit = (req, res) => {
   const { id } = req.params;
   const findRecipe = data.recipes.find(recipe => recipe.id === Number(id));
   if (!findRecipe) return res.send('Receita não encontrada');
-  return res.render('Admin/edit', { recipe: findRecipe });
+  return res.render('Admin/Recipes/edit', { recipe: findRecipe });
 }
 
 exports.put = (req, res) => {

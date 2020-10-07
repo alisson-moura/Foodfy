@@ -1,5 +1,5 @@
 const express = require('express');
-const recipeController = require('../controllers/Admin/recipeController');
+const recipeController = require('../app/controllers/Admin/recipeController');
 
 const adminRoutes = express.Router();
 
