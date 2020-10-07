@@ -198,3 +198,19 @@ color: var(--secondary-font-color);
   cursor: pointer;
   text-decoration: none;
 }
+
+.header {
+  margin-left: 50px;
+  
+}
+.header a {
+  margin-right: 30px;
+  font-weight: bold;
+  color:#999999;
+  text-decoration: none;
+  font-size: 15px;
+  text-align: left;
+}
+.header a.active {
+  color:#fff;
+}

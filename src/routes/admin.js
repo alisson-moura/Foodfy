@@ -1,5 +1,6 @@
 const express = require('express');
 const recipeController = require('../app/controllers/Admin/recipeController');
+const chefController = require('../app/controllers/Admin/chefController');
 
 const adminRoutes = express.Router();
 
@@ -15,5 +16,8 @@ adminRoutes.get("/recipes/:id/edit", recipeController.edit);
 adminRoutes.put("/recipes", recipeController.put);
 
 adminRoutes.delete("/recipes", recipeController.delete);
+
+//chefs
+adminRoutes.get('/chefs', chefController.index);
 
 module.exports = adminRoutes;
