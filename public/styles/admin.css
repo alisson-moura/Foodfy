@@ -95,6 +95,7 @@ header {
   display: flex;
   flex:1;
   justify-content: space-between;
+  margin-bottom: 30px;
 }
 .form-header button{
   background: var(--link-color);
@@ -230,4 +231,61 @@ color: var(--secondary-font-color);
 }
 .header a.active {
   color:#fff;
+}
+
+/*chefs*/
+.cards-chefs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+
+  gap: 30px;
+}
+
+.card-chef {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 20px;
+}
+.card-chef img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+.card-chef h2 {
+ font-family: 'Roboto';
+ font-weight: 400;
+ color: var(--font-color);
+ font-size: 18px; 
+ margin-bottom: 10px;
+}
+.card-chef a {  
+font-size: 14px;
+font-weight: bold;
+color:var(--link-color);
+text-decoration: none;
+}
+.chef-info {
+  margin-top:50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chef-info img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 30px;
+}
+.chef-info h1 {
+  font-weight: bold;
+  font-size: 36px;
+  color: var(--font-color);
+  margin-bottom: 4px;
+}
+.chef-info p {
+  font-weight: normal;
+  font-size: 20px;
+  color: var(--secondary-font-color);
+  text-align:center;
+  margin-bottom: 50px;
 }

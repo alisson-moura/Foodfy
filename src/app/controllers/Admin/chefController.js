@@ -1,18 +1,20 @@
 const Chef = require('../../models/Chef');
 const { objectIsValid } = require('../../../lib/checkData');
-const {date} = require('../../../lib/dates');
+const { date } = require('../../../lib/dates');
 
 module.exports = {
   index(req, res) {
-    return res.render('Admin/Chefs/chefs');
+    Chef.all((chefs) => {
+      return res.render('Admin/Chefs/chefs', { chefs });
+    });
   },
   create(req, res) {
     return res.render('Admin/Chefs/create');
   },
   post(req, res) {
     let data = req.body;
-    if(!objectIsValid(data)){
-      return res.render('Admin/Chefs/create', {error: 'Por favor preencha os campos corretamente'});
+    if (!objectIsValid(data)) {
+      return res.render('Admin/Chefs/create', { error: 'Por favor preencha os campos corretamente' });
     }
     data = {
       ...data,
@@ -21,6 +23,32 @@ module.exports = {
     Chef.create(data, (chef) => {
       return res.redirect('/admin/chefs');
     });
-    
+  },
+  show(req,res) {
+    const data = req.params
+    Chef.getById(data.id, (chef) => {
+      return res.render('Admin/Chefs/show', {chef});
+    });
+  },
+  edit(req,res) {
+    const data = req.params;
+    Chef.getById(data.id, (chef) => {
+      return res.render('Admin/Chefs/edit', {chef});
+    });
+  },
+  put(req, res) {
+    const data = req.body;
+    if (!objectIsValid(data)) {
+      return res.render('Admin/Chefs/edit', { error: 'Por favor preencha os campos corretamente' });
+    }
+    Chef.update(data, (chef) => {
+      return res.redirect(`/admin/chefs/${data.id}`);
+    });
+  },
+  delete(req, res){
+    const {id} = req.body;
+    Chef.delete(id, () => {
+      return res.redirect('/admin/chefs');
+    });
   }
 }

@@ -23,4 +23,11 @@ adminRoutes.get('/chefs', chefController.index);
 adminRoutes.get('/chefs/create', chefController.create);
 adminRoutes.post('/chefs', chefController.post);
 
+adminRoutes.get('/chefs/:id', chefController.show);
+
+adminRoutes.get('/chefs/:id/edit', chefController.edit);
+adminRoutes.put('/chefs', chefController.put);
+
+adminRoutes.delete("/chefs", chefController.delete);
+
 module.exports = adminRoutes;
