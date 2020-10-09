@@ -49,8 +49,15 @@ module.exports = {
   },
   delete(req, res) {
     const { id } = req.body;
-    Chef.delete(id, () => {
-      return res.redirect('/admin/chefs');
+    Chef.chefRecipes(id, (recipes) => {
+      if (recipes.length !== 0) {
+        console.log(recipes.length);
+        return res.send('Chefs que possuem receitas cadastradas, não podem ser deletados.');
+      } else {
+        Chef.delete(id, () => {
+          return res.redirect('/admin/chefs');
+        });
+      }
     });
   }
 }
