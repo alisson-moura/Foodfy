@@ -1,7 +1,13 @@
 function addIngredient() {
   const ingredients = document.querySelector('#ingredients');
-  const field = document.querySelectorAll('.ingredient');
-
+  let field = document.querySelectorAll('.ingredient');
+  if (field.length == 0) {
+    let content = `<div class="ingredient">
+                    <input type="text" name="ingredients[]" value=""/>
+                  </div>`;
+    ingredients.innerHTML += content;
+  }
+  field = document.querySelectorAll('.ingredient');
   const newField = field[field.length - 1].cloneNode(true);
 
   if (newField.children[0].value == '') return false;
@@ -12,7 +18,15 @@ function addIngredient() {
 
 function addPreparation() {
   const steps = document.querySelector('#steps');
-  const field = document.querySelectorAll('.step');
+  let field = document.querySelectorAll('.step');
+
+  if (field.length == 0) {
+    let content = `<div class="step">
+                    <input type="text" name="preparation[]" value=""/>
+                  </div>`;
+    steps.innerHTML += content;
+  }
+  field = document.querySelectorAll('.step');
 
   const newField = field[field.length - 1].cloneNode(true);
 

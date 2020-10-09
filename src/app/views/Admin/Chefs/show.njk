@@ -9,14 +9,14 @@
     <div class="chef-info">
       <img src="{{chef.avatar_url}}" alt="{{chef.name}}">
       <h1>{{chef.name}}</h1>
-      <p>4 receitas</p>
+      <p>{{chef.total}} receitas</p>
     </div>
      <div class="header-title">
       <h1>Receitas</h1>
     </div>
     <div class="cards">
       {% for recipe in recipes %}
-        <div class="card" id="{{recipe.index}}">
+        <div class="card" id="{{recipe.id}}">
           <div>
             <img src="{{recipe.image}}" alt="{{recipe.title}}" srcset="">
           </div>
@@ -24,7 +24,7 @@
             <h2>{{recipe.title}}</h2>
             <p class="autor">por
               {{recipe.author}}</p>
-            <a href="recipes/{{loop.index}}">Visualizar</a>
+            <a href="/admin/recipes/{{recipe.id}}">Visualizar</a>
           </div>
         </div>
       {% endfor %}

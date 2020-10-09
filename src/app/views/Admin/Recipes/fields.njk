@@ -4,6 +4,17 @@
 </div>
 
 <div class="item">
+  <label for="chef">Chef</label>
+  <select name="chef">
+    {% for chef in chefs %}
+      <option {% if chef.id == recipe.chef_id %} selected="selected" {% endif %} value="{{chef.id}}">
+        {{chef.name}}
+      </option>
+    {% endfor %}
+  </select>
+</div>
+
+<div class="item">
   <label for="title">Nome de apresentação da Receita</label>
   <input type="text" name="title" placeholder="" value="{{recipe.title}}">
 </div>

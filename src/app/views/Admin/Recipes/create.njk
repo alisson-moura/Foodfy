@@ -10,5 +10,9 @@
       {%include 'Admin/Recipes/fields.njk' %}
     </form>
     <script src="/scripts/admin/fieldsRecipes.js"></script>
+    {% if error %}
+      <div data-error="{{error}}" class="errorAlert"></div>
+      <script src="/scripts/admin/error.js"></script>
+    {% endif %}
   </div>
 {% endblock content %}

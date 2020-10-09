@@ -1,87 +1,58 @@
-const fs = require('fs');
-const data = require('../../../../data.json');
+const Recipe = require('../../models/Recipe');
+const { objectIsValid } = require('../../../lib/checkData');
 
 exports.index = (req, res) => {
-  return res.render('Admin/index', { recipes: data.recipes });
+  Recipe.all((recipes) => {
+    return res.render('Admin/index', { recipes });
+  });
 }
 
 exports.create = (req, res) => {
-  return res.render('Admin/Recipes/create');
+  Recipe.listChefs((chefs) => {
+    return res.render('Admin/Recipes/create', { chefs });
+  });
 }
+
 exports.post = (req, res) => {
-  const { image, title, ingredients, preparation, information } = req.body;
-  const keys = Object.keys(req.body);
-
-  for (key of keys) {
-    if (!req.body[key])
-      return res.send('Por favor, preencha todos os campos.');
+  let data = req.body;
+  if (!objectIsValid(data)) {
+    return res.render('Admin/Recipes/create', { error: 'Por favor preencha os campos corretamente' });
   }
-
-  let id = 1;
-  const lastId = data.recipes[data.recipes.length - 1];
-  if (lastId) {
-    id = lastId.id + 1;
-  }
-
-  data.recipes.push({ id, image, title, ingredients, preparation, information, author: 'Alisson Moura' });
-  fs.writeFile("data.json", JSON.stringify(data, null, 2), function (err) {
-    if (err) return res.send('Erro ao escrever no arquivo');
-
-    return res.send(data.recipes);
+  Recipe.create(data, (recipe) => {
+    return res.redirect(`/admin/recipes/${recipe.id}`);
   });
 }
 
 exports.show = (req, res) => {
   const { id } = req.params;
-  const findRecipe = data.recipes.find(recipe => recipe.id === Number(id));
-  if (!findRecipe) return res.send('Receita não encontrada');
-  return res.render('Admin/Recipes/show', { recipe: findRecipe });
+  Recipe.getById(id, (recipe) => {
+    return res.render('Admin/Recipes/show', { recipe });
+  });
 }
 
 exports.edit = (req, res) => {
   const { id } = req.params;
-  const findRecipe = data.recipes.find(recipe => recipe.id === Number(id));
-  if (!findRecipe) return res.send('Receita não encontrada');
-  return res.render('Admin/Recipes/edit', { recipe: findRecipe });
+  Recipe.getById(id, (recipe) => {
+    Recipe.listChefs((chefs) => {
+      return res.render('Admin/Recipes/edit', { recipe, chefs });
+    })
+  });
+
 }
 
 exports.put = (req, res) => {
-  const { id, title, image, ingredients, preparation, information } = req.body;
-  let index = 0;
-
-  const findRecipe = data.recipes.find((recipe, RecipeIndex) => {
-    if (recipe.id === Number(id)) {
-      index = RecipeIndex;
-      return true;
-    }
-  });
-
-  if (!findRecipe) return res.send('Receita não encontrada');
-
-  data.recipes[index] = {
-    ...findRecipe,
-    id: Number(id), 
-    title, 
-    image, 
-    ingredients, 
-    preparation, 
-    information
+  let data = req.body;
+  if (!objectIsValid(data)) {
+    return res.send('Por favor preencha os campos corretamente');
   }
-  fs.writeFile("data.json", JSON.stringify(data, null, 2), function (err) {
-    if (err) return res.send('Erro ao escrever no arquivo');
-    return res.redirect(`/admin/recipes/${ data.recipes[index].id}`);
+  Recipe.update(data, (recipe) => {
+    return res.redirect(`/admin/recipes/${recipe.id}`);
   });
 }
 
 exports.delete = (req, res) => {
-  const {id} = req.body;
-  const filteredRecipes = data.recipes.filter(recipe => recipe.id != id);
-
-  data.recipes = filteredRecipes;
-
-  fs.writeFile('data.json', JSON.stringify(data, null, 2), err => {
-    if(err) return res.send('Erro ao gravar arquivo.')
-
+  const { id } = req.body;
+  Recipe.delete(id, () => {
     return res.redirect('/admin');
   });
 }

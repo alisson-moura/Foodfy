@@ -24,16 +24,18 @@ module.exports = {
       return res.redirect('/admin/chefs');
     });
   },
-  show(req,res) {
+  show(req, res) {
     const data = req.params
     Chef.getById(data.id, (chef) => {
-      return res.render('Admin/Chefs/show', {chef});
+      Chef.chefRecipes(data.id, (recipes) => {
+        return res.render('Admin/Chefs/show', { chef, recipes });
+      });
     });
   },
-  edit(req,res) {
+  edit(req, res) {
     const data = req.params;
     Chef.getById(data.id, (chef) => {
-      return res.render('Admin/Chefs/edit', {chef});
+      return res.render('Admin/Chefs/edit', { chef });
     });
   },
   put(req, res) {
@@ -45,8 +47,8 @@ module.exports = {
       return res.redirect(`/admin/chefs/${data.id}`);
     });
   },
-  delete(req, res){
-    const {id} = req.body;
+  delete(req, res) {
+    const { id } = req.body;
     Chef.delete(id, () => {
       return res.redirect('/admin/chefs');
     });

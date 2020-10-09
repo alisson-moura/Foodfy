@@ -25,14 +25,18 @@ module.exports = {
     });
   },
   getById(id, callback) {
-    const query = `SELECT * FROM chefs
-                   WHERE id = $1`;
-    db.query(query, [id], function(err, results){
+    const query = `SELECT chefs.*, count(recipes.id)  AS total
+                    FROM chefs
+                    LEFT JOIN recipes
+                    ON chefs.id = recipes.chef_id
+                    WHERE chefs.id = $1
+                    GROUP BY chefs.id`;
+    db.query(query, [id], function (err, results) {
       if (err) throw `Database Error! ${err}`;
       return callback(results.rows[0]);
     });
   },
-  update(data, callback){
+  update(data, callback) {
     const query = `UPDATE chefs SET
                    avatar_url=($1),
                    name=($2),
@@ -49,12 +53,23 @@ module.exports = {
       if (err) throw `Database Error! ${err}`;
       return callback(results.rows[0]);
     });
-  }, 
-  delete(id, callback){
+  },
+  delete(id, callback) {
     const query = `DELETE FROM chefs WHERE id = $1`;
-    db.query(query, [id], (err, results)=> {
+    db.query(query, [id], (err, results) => {
       if (err) throw `Database Error! ${err}`;
       return callback();
+    });
+  },
+  chefRecipes(id, callback) {
+    const query = `SELECT title,image, recipes.id, chefs.name  
+                   FROM recipes
+                   LEFT JOIN chefs
+                   ON recipes.chef_id = chefs.id
+                   WHERE chefs.id = $1`;
+    db.query(query, [id], function (err, results) {
+      if (err) throw `Database Error! ${err}`;
+      return callback(results.rows);
     });
   }
 }
