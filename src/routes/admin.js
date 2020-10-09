@@ -5,6 +5,8 @@ const chefController = require('../app/controllers/Admin/chefController');
 const adminRoutes = express.Router();
 
 adminRoutes.get('/', (req,res) => (res.redirect('/admin/recipes')));
+
+//recipes
 adminRoutes.get('/recipes', recipeController.index);
 
 adminRoutes.get('/recipes/create', recipeController.create);

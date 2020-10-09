@@ -1,4 +1,4 @@
-{% extends "layout.njk" %}
+{% extends "Site/layout.njk" %}
 
 {% block head %}
   <title>Foodfy - {{recipe.title}}</title>
@@ -10,7 +10,7 @@
     <div class="title">
       <h1>{{recipe.title}}</h1>
       <p>por
-        {{recipe.author}}</p>
+        {{recipe.chef_name}}</p>
     </div>
     <div class="details">
       <div class="detail-content active">
@@ -25,7 +25,7 @@
 
       <div class="detail-content active">
         <h2>Modo de preparo
-          <span class="spanBtn">ESCONDER</span></h2>
+          <span class="spanBtn">Mostrar</span></h2>
         <ul>
           {% for step in recipe.preparation %}
             <li>{{step}}</li>
@@ -35,7 +35,7 @@
 
       <div class="detail-content active">
         <h2>Informações adicionais
-          <span class="spanBtn">ESCONDER</span></h2>
+          <span class="spanBtn">Mostrar</span></h2>
         <p>{{recipe.information}}</p>
       </div>
 

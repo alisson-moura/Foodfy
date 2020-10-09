@@ -1,4 +1,4 @@
-{% extends "layout.njk" %}
+{% extends "Site/layout.njk" %}
 
 {% block head %}
   <title>Foodfy - Receitas</title>
@@ -8,12 +8,12 @@
     <div class="list">
       <div class="cards">
         {% for recipe in recipes %}
-          <div class="card" id="{{recipe.index}}">
-            <a href="/recipe/{{recipe.id}}">
+          <div class="card" id="{{recipe.id}}">
+            <a href="/recipes/{{recipe.id}}">
               <img src="{{recipe.image}}" alt="{{recipe.title}}" srcset="">
               <h2>{{recipe.title}}</h2>
               <p class="autor">por
-                {{recipe.author}}</p>
+                {{recipe.chef_name}}</p>
             </a>
           </div>
         {% endfor %}

@@ -18,7 +18,12 @@ module.exports = {
     });
   },
   all(callback) {
-    const query = `SELECT * FROM chefs`;
+    const query = `SELECT chefs.*, count(recipes.id) AS total
+                   FROM chefs
+                   LEFT JOIN recipes
+                   ON chefs.id = recipes.chef_id
+                   GROUP BY chefs.id
+                   `;
     db.query(query, (err, results) => {
       if (err) throw `Database Error! ${err}`;
       return callback(results.rows);

@@ -206,3 +206,33 @@ footer p {
   color:#999999;
   cursor: pointer;
 }
+/*chefs*/
+.cards-chefs {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-top: 20px;
+  gap: 30px;
+}
+
+.card-chef {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 20px;
+}
+.card-chef img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+.card-chef h2 {
+ font-family: 'Roboto';
+ font-weight: 400;
+ color: #111111;
+ font-size: 18px; 
+ margin-bottom: 5px;
+}
+.card-chef p {  
+font-size: 14px;
+color: #666666;
+text-decoration: none;
+}
