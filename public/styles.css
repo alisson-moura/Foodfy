@@ -17,7 +17,27 @@ header {
   margin: 0 auto;
   justify-items: center;
 }
-
+header form {
+  float: right;
+}
+header form input {
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  color: #999999;
+  font-size: 14px;
+  padding: 10px 25px;
+  box-sizing: border-box;
+  margin-right: 4px;
+}
+header form button {
+  padding: 10px 10px;
+  background: #6558c3;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+}
 header img{
   float: left;
   margin-right: 120px;
@@ -37,7 +57,10 @@ main {
   font-size: 16px;
   color: #111111;
   font-family: 'Roboto', sans-serif;
-  font-weight: 700;
+  font-weight: 400;
+}
+.links a.active {
+  font-weight: bold;
 }
 
 .banner {

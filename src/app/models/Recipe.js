@@ -30,11 +30,15 @@ module.exports = {
     });
   },
 
-  all(callback) {
-    const query = `SELECT recipes.*, chefs.name AS chef_name 
+  all(filter, callback) {
+    let query = `SELECT recipes.*, chefs.name AS chef_name 
                    FROM recipes
                    LEFT JOIN chefs
                    ON recipes.chef_id = chefs.id`;
+    if(filter){
+      query =`${query}
+              WHERE recipes.title ILIKE '%${filter}%'`;
+    }               
     db.query(query, (err, results) => {
       if (err) throw `Database Error! ${err}`;
       return callback(results.rows);

@@ -1,15 +1,16 @@
 const Recipe = require('../../models/Recipe');
-const { objectIsValid } = require('../../../lib/checkData');
 
 module.exports = {
   index(req, res) {
-    Recipe.all((recipes) => {
+    const {search} = req.query;
+    Recipe.all(search, (recipes) => {
       return res.render('Site/index', { recipes });
     });
   },
   list(req, res) {
-    Recipe.all((recipes) => {
-      return res.render('Site/recipes.njk', { recipes });
+    const {search} = req.query;
+    Recipe.all(search, (recipes) => {
+      return res.render('Site/recipes.njk', { recipes, search });
     });
   },
   show(req, res){

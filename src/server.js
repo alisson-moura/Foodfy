@@ -3,7 +3,6 @@ const nunjucks = require('nunjucks');
 const methodOverride = require('method-override');
 const routes = require('./routes');
 
-
 const port = 5000;
 const app = express();
 
@@ -19,7 +18,6 @@ nunjucks.configure('src/app/views', {
 
 app.use(methodOverride('_method'));
 app.use(routes)
-
 
 app.listen(port, function () {
   console.log(`app is running on port: ${port}`);

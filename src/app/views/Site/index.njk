@@ -3,7 +3,12 @@
 {% block head %}
   <title>Foodfy - Home</title>
 {% endblock head %}
-
+{% block search %}
+  <form action="/recipes" method="get">
+    <input type="text" name="search" value="{{search}}" placeholder="Procure uma receita">
+    <button type="submit">Pesquisar</button>
+  </form>
+{% endblock search %}
 {% block content %}
   <main>
     <div class="banner">
