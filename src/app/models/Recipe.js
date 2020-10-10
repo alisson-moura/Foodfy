@@ -35,10 +35,10 @@ module.exports = {
                    FROM recipes
                    LEFT JOIN chefs
                    ON recipes.chef_id = chefs.id`;
-    if(filter){
-      query =`${query}
+    if (filter) {
+      query = `${query}
               WHERE recipes.title ILIKE '%${filter}%'`;
-    }               
+    }
     db.query(query, (err, results) => {
       if (err) throw `Database Error! ${err}`;
       return callback(results.rows);
@@ -67,7 +67,7 @@ module.exports = {
                    information=($6)
                    WHERE id = $7
                    RETURNING id`;
-                   
+
     const values = [
       data.title,
       data.image,
@@ -89,6 +89,26 @@ module.exports = {
     db.query(query, [id], (err, results) => {
       if (err) throw `Database Error! ${err}`;
       return callback();
+    });
+  },
+  allWithPagination(filter, page = 1, limit, callback) {
+    let offset = limit * (page - 1);
+
+    let query = `SELECT recipes.*, chefs.name AS chef_name 
+    FROM recipes
+    LEFT JOIN chefs
+    ON recipes.chef_id = chefs.id`;
+    if (filter) {
+      query = `${query}
+      WHERE recipes.title ILIKE '%${filter}%'`;
+    }
+    query = `${query}
+             OFFSET $1
+             LIMIT $2`
+    db.query(query,[offset, limit], (err, results) => {
+      if (err) throw `Database Error! ${err}`;
+
+      return callback(results.rows);
     });
   }
 }

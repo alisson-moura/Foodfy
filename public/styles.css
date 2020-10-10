@@ -259,3 +259,8 @@ font-size: 14px;
 color: #666666;
 text-decoration: none;
 }
+.pagination {
+  margin: 16px auto;
+  width: 400px;
+  text-align: center;
+}
