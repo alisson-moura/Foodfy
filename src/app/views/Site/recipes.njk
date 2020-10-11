@@ -5,7 +5,7 @@
 {% endblock head %}
 {% block search %}
 <form action="/recipes" method="get">
-  <input type="text" name="search" value="{{search}}" placeholder="Procure uma receita">
+  <input type="text" name="filter" value="{{filter}}" placeholder="Procure uma receita">
   <button type="submit">Pesquisar</button>
 </form>
 {% endblock search %}
@@ -27,7 +27,7 @@
           </div>
         {% endfor %}
       </div>
-       <div class="pagination" data-page={{pagination.page}} data-total={{pagination.total}}></div>
+       <div class="pagination" data-page={{pagination.page}} data-total={{pagination.total}} data-filter={{filter}}></div>
     </div>
   </main>
 <script src="/scripts/site/pagination.js"></script>

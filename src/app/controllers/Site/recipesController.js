@@ -8,14 +8,14 @@ module.exports = {
     });
   },
   list(req, res) {
-    let { search, page } = req.query;
+    let { filter, page } = req.query;
 
-    Recipe.allWithPagination(search, page, 2, (recipes) => {
+    Recipe.allWithPagination(filter, page, 2, (recipes) => {
       let pagination = {
-        total: 5,
+        total: Math.ceil(recipes[0].total / 2),
         page: page ? page : 1,
       }
-      return res.render('Site/recipes.njk', { recipes, search, pagination });
+      return res.render('Site/recipes.njk', { recipes, filter, pagination });
     });
   },
   show(req, res) {

@@ -264,3 +264,15 @@ text-decoration: none;
   width: 400px;
   text-align: center;
 }
+.pagination a {
+  padding: 4px 8px;
+  background: #6558c3;
+  margin: 0 2px;
+  border-radius: 4px;
+  font-weight: bold;
+  color: gray;
+  text-decoration: none;
+}
+.pagination a.active {
+  color: #fff;
+}
