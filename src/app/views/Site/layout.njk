@@ -11,22 +11,23 @@
   </head>
 
   <body>
-    <header>
-      <a href="/">
-        <img src="/assets/logo.png" alt="Foodfy" srcset="">
-      </a>
-      <div class="links">
-        <a href="/about">Sobre</a>
-        <a href="/recipes">Receitas</a>
-        <a href="/chefs">Chefs</a>
+    <div class="body-content">
+      <header>
+        <a href="/">
+          <img src="/assets/logo.png" alt="Foodfy" srcset="">
+        </a>
+        <div class="links">
+          <a href="/about">Sobre</a>
+          <a href="/recipes">Receitas</a>
+          <a href="/chefs">Chefs</a>
           {% block search %}{% endblock search %}
-      </div>
-    </header>
-    {% block content %}{% endblock content %}
+        </div>
+      </header>
+      {% block content %}{% endblock content %}
+    </div>
+    <script src="/scripts/scripts.js"></script>
     <footer>
       <p>Todos direitos reservados, receitas Foodfy</p>
     </footer>
-    <script src="/scripts/scripts.js"></script>
   </body>
-
 </html>
