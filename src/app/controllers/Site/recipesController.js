@@ -11,9 +11,12 @@ module.exports = {
     let { filter, page } = req.query;
 
     Recipe.allWithPagination(filter, page, 2, (recipes) => {
-      let pagination = {
-        total: Math.ceil(recipes[0].total / 2),
-        page: page ? page : 1,
+      pagination = {}
+      if(recipes.length != 0) {
+       pagination = {
+          total: Math.ceil(recipes[0].total / 2),
+          page: page ? page : 1,
+        }
       }
       return res.render('Site/recipes.njk', { recipes, filter, pagination });
     });
