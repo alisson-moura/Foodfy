@@ -6,6 +6,7 @@
       <h1>Gerenciar Receitas</h1>
       <a href="recipes/create" class="button">Nova Receita</a>
     </div>
+    {% if not recipes %}
     <div class="cards">
       {% for recipe in recipes %}
         <div class="card" id="{{recipe.index}}">
@@ -21,5 +22,8 @@
         </div>
       {% endfor %}
     </div>
+    {% else %}
+      <p>Sem receitas</p>
+    {% endif %}
   </div>
 {% endblock content %}
