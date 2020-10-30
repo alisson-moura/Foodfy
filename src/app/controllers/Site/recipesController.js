@@ -3,7 +3,7 @@ const Recipe = require('../../models/Recipe');
 module.exports = {
   index(req, res) {
     const { search } = req.query;
-    Recipe.all(search, (recipes) => {
+    Recipe.all(search, function(recipes) {
       return res.render('Site/index', { recipes });
     });
   },
