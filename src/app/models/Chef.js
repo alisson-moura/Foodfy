@@ -2,14 +2,13 @@ const db = require('../../config/database');
 
 module.exports = {
   create(data, callback) {
-    const query = `INSERT INTO chefs (name, avatar_url,description, created_at)
-                   VALUES ($1, $2, $3, $4)
+    const query = `INSERT INTO chefs (name, file_id, description)
+                   VALUES ($1, $2, $3)
                    RETURNING id`;
     const values = [
       data.name,
-      data.avatar_url,
+      data.file_id,
       data.description,
-      data.created_at
     ];
 
     db.query(query, values, (err, results) => {
@@ -17,17 +16,14 @@ module.exports = {
       return callback(results.rows[0]);
     });
   },
-  all(callback) {
+  all() {
     const query = `SELECT chefs.*, count(recipes.id) AS total
                    FROM chefs
                    LEFT JOIN recipes
                    ON chefs.id = recipes.chef_id
                    GROUP BY chefs.id
                    `;
-    db.query(query, (err, results) => {
-      if (err) throw `Database Error! ${err}`;
-      return callback(results.rows);
-    });
+    return db.query(query);
   },
   getById(id, callback) {
     const query = `SELECT chefs.*, count(recipes.id)  AS total
@@ -36,10 +32,7 @@ module.exports = {
                     ON chefs.id = recipes.chef_id
                     WHERE chefs.id = $1
                     GROUP BY chefs.id`;
-    db.query(query, [id], function (err, results) {
-      if (err) throw `Database Error! ${err}`;
-      return callback(results.rows[0]);
-    });
+   return db.query(query, [id])
   },
   update(data, callback) {
     const query = `UPDATE chefs SET
@@ -72,9 +65,10 @@ module.exports = {
                    LEFT JOIN chefs
                    ON recipes.chef_id = chefs.id
                    WHERE chefs.id = $1`;
-    db.query(query, [id], function (err, results) {
-      if (err) throw `Database Error! ${err}`;
-      return callback(results.rows);
-    });
+   return db.query(query, [id])
+  },
+  chefFile(file_id){
+    const query = `SELECT * FROM files WHERE id = $1`;
+    return db.query(query, [file_id]);
   }
 }

@@ -1,10 +1,11 @@
 const express = require('express');
+const {upload} = require('../config/uploadFile');
 const recipeController = require('../app/controllers/Admin/recipeController');
 const chefController = require('../app/controllers/Admin/chefController');
 
 const adminRoutes = express.Router();
 
-adminRoutes.get('/', (req,res) => (res.redirect('/admin/recipes')));
+adminRoutes.get('/', (req, res) => (res.redirect('/admin/recipes')));
 
 //recipes
 adminRoutes.get('/recipes', recipeController.index);
@@ -23,7 +24,7 @@ adminRoutes.delete("/recipes", recipeController.delete);
 adminRoutes.get('/chefs', chefController.index);
 
 adminRoutes.get('/chefs/create', chefController.create);
-adminRoutes.post('/chefs', chefController.post);
+adminRoutes.post('/chefs', upload.single('avatar'), chefController.post);
 
 adminRoutes.get('/chefs/:id', chefController.show);
 
