@@ -290,41 +290,49 @@ text-decoration: none;
   margin-bottom: 50px;
 }
 
+/* chef avatar with preview */
 .chef-avatar {
-  width: 150px;
-  height: 200px;
-  position: relative;
-  margin: 0 auto;
-}
-.chef-avatar input[type=file] {
-  opacity: 0;
-  cursor: pointer;
-  width: 150px;
-  height: 150px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  cursor: pointer;
-}
-.chef-avatar .chef-avatar-button {
-  border:  1px solid #dddddd;
-  border-radius: 50%;
   width: 150px;
   height: 150px;
   display: flex;
+  flex-direction: column;
+  margin: 0 auto 16px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 12px;
 }
 
-.chef-avatar .chef-avatar-button span i {
-  color: #777777;
-  font-size: 30px;
+.chef-avatar .img-container img {
+  width: 100%;
+  height: 150px;
+  border: 1px solid #dddddd;
+  border-radius: 8px;
+  object-fit: fill;
 }
 
-.chef-avatar label  {
+.chef-avatar .avatar-button {
+  margin-top: 16px;
+  position: relative;
+  width: 120px;
+  height: 28px;
+  background: var(--link-color);
+  border-radius: 4px;
+}
+.chef-avatar .avatar-button input[type="file"]{
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.chef-avatar .avatar-button .button {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding: 4px;
   font-size: 16px;
   font-weight: bold;
-  color: var(--font-color);
-  margin-left: 4px;
+  color: white;
+  cursor: pointer;
 }
