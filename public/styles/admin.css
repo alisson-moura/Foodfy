@@ -289,3 +289,42 @@ text-decoration: none;
   text-align:center;
   margin-bottom: 50px;
 }
+
+.chef-avatar {
+  width: 150px;
+  height: 200px;
+  position: relative;
+  margin: 0 auto;
+}
+.chef-avatar input[type=file] {
+  opacity: 0;
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+.chef-avatar .chef-avatar-button {
+  border:  1px solid #dddddd;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.chef-avatar .chef-avatar-button span i {
+  color: #777777;
+  font-size: 30px;
+}
+
+.chef-avatar label  {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--font-color);
+  margin-left: 4px;
+}
