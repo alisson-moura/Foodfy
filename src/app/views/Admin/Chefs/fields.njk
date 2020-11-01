@@ -1,6 +1,7 @@
 <div class="chef-avatar">
   <div class="img-container">
-    <img id="img-preview" src="/assets/no-preview.png" alt="preview">
+    <img id="img-preview" {% if file %} src="{{file.src}}" {% else %} src="/assets/no-preview.png" {% endif %}
+      alt="preview">
   </div>
   <div class="avatar-button">
     <input type="file" name="avatar" id="avatar" accept="image/png, image/jpeg">

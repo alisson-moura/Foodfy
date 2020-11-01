@@ -29,7 +29,7 @@ adminRoutes.post('/chefs', upload.single('avatar'), chefController.post);
 adminRoutes.get('/chefs/:id', chefController.show);
 
 adminRoutes.get('/chefs/:id/edit', chefController.edit);
-adminRoutes.put('/chefs', chefController.put);
+adminRoutes.put('/chefs', upload.single('avatar'), chefController.put);
 
 adminRoutes.delete("/chefs", chefController.delete);
 

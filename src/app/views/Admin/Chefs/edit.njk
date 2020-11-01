@@ -3,7 +3,7 @@
 {% block content %}
   <div class="main">
     <div class="form-header">
-      <h1>Editar Receita</h1>
+      <h1>Editar Chef</h1>
       <div>
         <button form="delete-form"class="delete-btn" onclick="">Deletar</button>
         <button form="save-form" type="submit">Salvar</button>
@@ -12,7 +12,7 @@
     <form action="/admin/chefs/?_method=DELETE" method="post" id="delete-form">
       <input type="hidden" name="id" value="{{chef.id}}">
     </form>
-    <form action="/admin/chefs/?_method=PUT" id="save-form" method="post">
+    <form action="/admin/chefs/?_method=PUT" id="save-form" method="post" enctype="multipart/form-data">
       {%include 'Admin/Chefs/fields.njk' %}
       <input type="hidden" name="id" value="{{chef.id}}">
     </form>

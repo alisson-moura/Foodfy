@@ -25,7 +25,7 @@ module.exports = {
                    `;
     return db.query(query);
   },
-  getById(id, callback) {
+  getById(id) {
     const query = `SELECT chefs.*, count(recipes.id)  AS total
                     FROM chefs
                     LEFT JOIN recipes
@@ -34,33 +34,27 @@ module.exports = {
                     GROUP BY chefs.id`;
    return db.query(query, [id])
   },
-  update(data, callback) {
+  update(data) {
     const query = `UPDATE chefs SET
-                   avatar_url=($1),
+                   file_id=($1),
                    name=($2),
                    description=($3)
                    WHERE id = $4`;
     const values = [
-      data.avatar_url,
+      data.file_id,
       data.name,
       data.description,
       data.id
     ];
 
-    db.query(query, values, (err, results) => {
-      if (err) throw `Database Error! ${err}`;
-      return callback(results.rows[0]);
-    });
+    return db.query(query, values);
   },
-  delete(id, callback) {
+  delete(id) {
     const query = `DELETE FROM chefs WHERE id = $1`;
-    db.query(query, [id], (err, results) => {
-      if (err) throw `Database Error! ${err}`;
-      return callback();
-    });
+    return  db.query(query, [id]);
   },
-  chefRecipes(id, callback) {
-    const query = `SELECT title,image, recipes.id, chefs.name  
+  chefRecipes(id) {
+    const query = `SELECT title, recipes.id, chefs.name  
                    FROM recipes
                    LEFT JOIN chefs
                    ON recipes.chef_id = chefs.id
