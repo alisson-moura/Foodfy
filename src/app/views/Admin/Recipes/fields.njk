@@ -1,15 +1,28 @@
-<div class="item">
-  <label for="image">Imagem da receita</label>
-  <input type="URL" name="image" placeholder="https://" value="{{recipe.image}}">
+<label class="label-images" for="images">Adicione até 5 imagens</label>
+<div class="image-container">
+
+  
+
+    <div id="images-upload">
+      <input onchange="PhotosUpload.handleFileInput(event)" type="file" name="images" id="images-input" multiple accept="image/*">
+      <div>
+        <span><i class="material-icons">add</i></span>
+      </div>
+    </div>
+
+    <div id="images-preview">
+    </div>
+
+  
 </div>
 
 <div class="item">
   <label for="chef">Chef</label>
   <select name="chef">
     {% for chef in chefs %}
-      <option {% if chef.id == recipe.chef_id %} selected="selected" {% endif %} value="{{chef.id}}">
-        {{chef.name}}
-      </option>
+    <option {% if chef.id == recipe.chef_id %} selected="selected" {% endif %} value="{{chef.id}}">
+      {{chef.name}}
+    </option>
     {% endfor %}
   </select>
 </div>
@@ -23,9 +36,9 @@
   <div id="ingredients">
     <label for="image_recipe">Ingredientes</label>
     {% for ingredient in recipe.ingredients %}
-      <div class="ingredient">
-        <input type="text" name="ingredients[]" value="{{ingredient}}"/>
-      </div>
+    <div class="ingredient">
+      <input type="text" name="ingredients[]" value="{{ingredient}}" />
+    </div>
     {% endfor %}
   </div>
   <button class="add-ingredient btn-add">
@@ -37,9 +50,9 @@
   <div id="steps">
     <label for="image_recipe">Modo de Preparo</label>
     {% for step in recipe.preparation %}
-      <div class="step">
-        <input type="text" name="preparation[]" value="{{step}}"/>
-      </div>
+    <div class="step">
+      <input type="text" name="preparation[]" value="{{step}}" />
+    </div>
     {% endfor %}
 
   </div>
