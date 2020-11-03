@@ -1,9 +1,6 @@
 const Chef = require('../../models/Chef');
 const File = require('../../models/File');
 const { objectIsValid } = require('../../../lib/checkData');
-const { date } = require('../../../lib/dates');
-const { chefFile } = require('../../models/Chef');
-const { head } = require('../../../routes');
 
 module.exports = {
   async index(req, res) {

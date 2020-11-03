@@ -2,13 +2,13 @@ const db = require('../../config/database');
 const { date } = require('../../lib/dates');
 
 module.exports = {
-  create(data, callback) {
-    const query = `INSERT INTO recipes (title, image, chef_id, ingredients, preparation, information, created_at)
-                   VALUES ($1, $2, $3, $4, $5, $6, $7)
+  create(data) {
+    const query = `INSERT INTO recipes 
+                  (title, chef_id, ingredients, preparation, information, created_at)
+                   VALUES ($1, $2, $3, $4, $5, $6)
                    RETURNING id`;
     const values = [
       data.title,
-      data.image,
       data.chef,
       data.ingredients,
       data.preparation,
@@ -16,10 +16,7 @@ module.exports = {
       date(Date.now()).iso
     ];
 
-    db.query(query, values, (err, results) => {
-      if (err) throw `Database Error! ${err}`;
-      return callback(results.rows[0]);
-    });
+    return db.query(query, values);
   },
 
   listChefs(callback) {
@@ -45,16 +42,13 @@ module.exports = {
     });
   },
 
-  getById(id, callback) {
+  getById(id) {
     const query = `SELECT recipes.*, chefs.name AS chef_name 
                    FROM recipes
                    LEFT JOIN chefs
                    ON recipes.chef_id = chefs.id
                    WHERE recipes.id = $1`;
-    db.query(query, [id], function (err, results) {
-      if (err) throw `Database Error! ${err}`;
-      return callback(results.rows[0]);
-    });
+    return db.query(query, [id]);
   },
 
   update(data, callback) {

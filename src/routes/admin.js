@@ -11,7 +11,7 @@ adminRoutes.get('/', (req, res) => (res.redirect('/admin/recipes')));
 adminRoutes.get('/recipes', recipeController.index);
 
 adminRoutes.get('/recipes/create', recipeController.create);
-adminRoutes.post('/recipes', recipeController.post);
+adminRoutes.post('/recipes', upload.array("images", 5), recipeController.post);
 
 adminRoutes.get('/recipes/:id', recipeController.show);
 

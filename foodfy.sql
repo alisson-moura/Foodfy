@@ -12,7 +12,6 @@ CREATE TABLE "chefs" (
 CREATE TABLE "recipes" (
   "id" SERIAL PRIMARY KEY,
   "title" varchar NOT NULL,
-  "image" varchar NOT NULL,
   "chef_id" int NOT NULL,
   "ingredients" varchar,
   "preparation" varchar,
