@@ -51,6 +51,11 @@ module.exports = {
     return db.query(query, [id]);
   },
 
+  getImagesRecipe(recipe_id) {
+    const query = ` SELECT * FROM recipes_files WHERE recipe_id = $1`;
+    return db.query(query, [recipe_id]);
+  },
+  
   update(data, callback) {
     const query = `UPDATE recipes SET
                    title=($1), 

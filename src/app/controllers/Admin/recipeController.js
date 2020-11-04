@@ -1,7 +1,10 @@
 const Recipe = require('../../models/Recipe');
 const File = require('../../models/File');
-const { objectIsValid } = require('../../../lib/checkData');
 const RecipeFiles = require('../../models/RecipeFiles');
+
+const { objectIsValid } = require('../../../lib/checkData');
+const { createArrayFromStringPG } = require('../../../lib/createArrayFromString');
+
 
 exports.index = (req, res) => {
   const { search } = req.query;
@@ -45,11 +48,33 @@ exports.post = async (req, res) => {
   }
 }
 
-exports.show = (req, res) => {
+exports.show = async (req, res) => {
   const { id } = req.params;
-  Recipe.getById(id, (recipe) => {
-    return res.render('Admin/Recipes/show', { recipe });
+
+  let result = await Recipe.getById(id);
+  let recipe = result.rows[0];
+
+  result = await Recipe.getImagesRecipe(id);
+  let imagesId = result.rows;
+
+  let files = await Promise.all(imagesId.map(async image => {
+    let rows = await File.getById(image.file_id);
+    image = rows.rows[0];
+    return image;
+  }));
+
+  let images = files.map(file => {
+    return file = {
+      ...file,
+      src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+    }
   });
+
+
+  recipe.ingredients = createArrayFromStringPG(recipe.ingredients);
+  recipe.preparation = createArrayFromStringPG(recipe.preparation);
+
+  return res.render('Admin/Recipes/show', { recipe, images });
 }
 
 exports.edit = (req, res) => {
