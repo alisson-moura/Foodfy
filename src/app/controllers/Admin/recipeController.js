@@ -54,6 +54,11 @@ exports.show = async (req, res) => {
   let result = await Recipe.getById(id);
   let recipe = result.rows[0];
 
+  if(!recipe) {
+    return res.send(`Error 404
+                    Receita não encontrada`)
+  }
+
   result = await Recipe.getImagesRecipe(id);
   let imagesId = result.rows;
 
