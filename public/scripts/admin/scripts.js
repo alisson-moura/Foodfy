@@ -105,3 +105,16 @@ const PhotosUpload = {
     PhotosUpload.input.files = PhotosUpload.getAllFiles();
   }
 }
+
+const SelectImageBanner = {
+  banner: document.querySelector('.image-banner'),
+  images:  document.querySelectorAll('.image-miniature'),
+  handleSelectImage(event) {
+    let imageSelected = event.target;
+    for (const image of this.images) {
+      image.src == imageSelected.src ? image.style.opacity = 0.7 : image.style.opacity = 1
+    }
+  
+    SelectImageBanner.banner.src = event.target.src
+  }
+}

@@ -7,7 +7,17 @@
         {{recipe.title}}</h2>
       <a href="/admin/recipes/{{recipe.id}}/edit">Editar receita</a>
     </div>
-    <img src="{{images[0].src}}" alt="" srcset="" class="image-banner">
+
+    
+    <div class="gallery">
+      <img src="{{images[0].src}}" alt="" srcset="" class="image-banner">
+      <div class="images-gallery">
+        {% for image in images %}
+        <img src="{{image.src}}" alt="" onclick="SelectImageBanner.handleSelectImage(event)" srcset="" class="image-miniature">
+        {% endfor %}
+      </div>
+    </div>
+    
     <div class="title">
       <h1>{{recipe.title}}</h1>
       <p>por
