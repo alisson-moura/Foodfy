@@ -1,5 +1,5 @@
 const express = require('express');
-const {upload} = require('../config/uploadFile');
+const { upload } = require('../config/uploadFile');
 const recipeController = require('../app/controllers/Admin/recipeController');
 const chefController = require('../app/controllers/Admin/chefController');
 
@@ -16,7 +16,7 @@ adminRoutes.post('/recipes', upload.array("images", 5), recipeController.post);
 adminRoutes.get('/recipes/:id', recipeController.show);
 
 adminRoutes.get("/recipes/:id/edit", recipeController.edit);
-adminRoutes.put("/recipes", recipeController.put);
+adminRoutes.put("/recipes", upload.array("images", 5), recipeController.put);
 
 adminRoutes.delete("/recipes", recipeController.delete);
 

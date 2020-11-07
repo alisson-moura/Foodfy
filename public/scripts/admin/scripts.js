@@ -64,6 +64,7 @@ const PhotosUpload = {
   getAllFiles() {
     const dataTransfer = new DataTransfer() || new ClipboardEvent("").clipboardData;
     PhotosUpload.files.forEach(file => dataTransfer.items.add(file))
+    
     return dataTransfer.files;
   },
 
@@ -103,6 +104,17 @@ const PhotosUpload = {
     });
 
     PhotosUpload.input.files = PhotosUpload.getAllFiles();
+  },
+
+  removeOldPhoto(event) {
+    const photoDiv = event.target.parentNode;
+    if(photoDiv.id) {
+      let removedFiles = document.querySelector('input[name="removed_files"]');
+      if(removedFiles){
+        removedFiles.value += `${photoDiv.id},`; 
+      }
+      photoDiv.remove();
+    } 
   }
 }
 

@@ -6,13 +6,13 @@
       <h1>Editar Receita</h1>
       <div>
         <button form="delete-form" class="delete-btn" onclick="">Deletar</button>
-        <button form="save-form" type="submit">Salvar receita</button>
+        <button form="save-form" type="submit" >Salvar receita</button>
       </div>
     </div>
     <form action="/admin/recipes/?_method=DELETE" method="post" id="delete-form">
       <input type="hidden" name="id" value="{{recipe.id}}">
     </form>
-    <form action="/admin/recipes/?_method=PUT" id="save-form" method="post">
+    <form action="/admin/recipes/?_method=PUT" id="save-form" method="post" enctype="multipart/form-data">
       {%include 'Admin/Recipes/fields.njk' %}
       <input type="hidden" name="id" value="{{recipe.id}}">
     </form>

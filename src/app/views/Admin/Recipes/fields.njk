@@ -14,11 +14,12 @@
   <div id="images-preview">
     {% if images %}
     {% for image in images %}
-    <div class="image">
+    <div class="image" id="{{image.id}}">
       <img src="{{image.src}}" alt="{{recipe.name}}" />
-      <i class="material-icons">close</i>
+      <i class="material-icons" onclick="PhotosUpload.removeOldPhoto(event)">close</i>
     </div>
     {% endfor %}
+    <input type="hidden" name="removed_files">
     {% endif %}
   </div>
 

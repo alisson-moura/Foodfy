@@ -6,5 +6,9 @@ module.exports = {
                    VALUES ($1, $2)`;
 
     return db.query(query, [file_id, recipe_id]);
+  },
+  delete(file_id) {
+    const query = `DELETE FROM recipes_files WHERE file_id = $1`;
+    return db.query(query, [file_id]);
   }
 }
