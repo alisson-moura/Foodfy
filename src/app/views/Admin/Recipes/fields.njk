@@ -1,19 +1,28 @@
 <label class="label-images" for="images">Adicione até 5 imagens</label>
 <div class="image-container">
 
-  
 
-    <div id="images-upload">
-      <input  onchange="PhotosUpload.handleFileInput(event)" type="file" name="images" id="images-input" multiple accept="image/*">
-      <div>
-        <span><i class="material-icons">add</i></span>
-      </div>
+
+  <div id="images-upload">
+    <input onchange="PhotosUpload.handleFileInput(event)" type="file" name="images" id="images-input" multiple
+      accept="image/*">
+    <div>
+      <span><i class="material-icons">add</i></span>
     </div>
+  </div>
 
-    <div id="images-preview">
+  <div id="images-preview">
+    {% if images %}
+    {% for image in images %}
+    <div class="image">
+      <img src="{{image.src}}" alt="{{recipe.name}}" />
+      <i class="material-icons">close</i>
     </div>
+    {% endfor %}
+    {% endif %}
+  </div>
 
-  
+
 </div>
 
 <div class="item">

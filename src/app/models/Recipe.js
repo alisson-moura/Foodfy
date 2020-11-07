@@ -19,12 +19,9 @@ module.exports = {
     return db.query(query, values);
   },
 
-  listChefs(callback) {
+  listChefs() {
     const query = `SELECT name, id FROM chefs`;
-    db.query(query, function (err, results) {
-      if (err) throw `Database Error! ${err}`;
-      return callback(results.rows);
-    });
+    return db.query(query);
   },
 
   all(filter, callback) {
@@ -90,6 +87,7 @@ module.exports = {
       return callback();
     });
   },
+
   allWithPagination(filter, page = 1, limit, callback) {
     let offset = limit * (page - 1);
 
@@ -112,5 +110,7 @@ module.exports = {
 
       return callback(results.rows);
     });
-  }
+  },
+
+
 }

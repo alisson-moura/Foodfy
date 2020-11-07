@@ -75,21 +75,41 @@ exports.show = async (req, res) => {
     }
   });
 
-
   recipe.ingredients = createArrayFromStringPG(recipe.ingredients);
   recipe.preparation = createArrayFromStringPG(recipe.preparation);
 
   return res.render('Admin/Recipes/show', { recipe, images });
 }
 
-exports.edit = (req, res) => {
+exports.edit = async (req, res) => {
   const { id } = req.params;
-  Recipe.getById(id, (recipe) => {
-    Recipe.listChefs((chefs) => {
-      return res.render('Admin/Recipes/edit', { recipe, chefs });
-    })
+
+  let results = await Recipe.getById(id);
+  let recipe = results.rows[0];
+  results = await Recipe.listChefs();
+  let chefs = results.rows;
+ 
+
+  result = await Recipe.getImagesRecipe(id);
+  let imagesId = result.rows;
+  
+  let files = await Promise.all(imagesId.map(async image => {
+    let rows = await File.getById(image.file_id);
+    image = rows.rows[0];
+    return image;
+  }));
+
+  let images = files.map(file => {
+    return file = {
+      ...file,
+      src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
+    }
   });
 
+  recipe.ingredients = createArrayFromStringPG(recipe.ingredients);
+  recipe.preparation = createArrayFromStringPG(recipe.preparation);
+  
+  return res.render('Admin/Recipes/edit', { recipe, chefs, images });
 }
 
 exports.put = (req, res) => {
