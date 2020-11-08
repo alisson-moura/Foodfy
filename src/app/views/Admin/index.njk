@@ -1,29 +1,29 @@
 {% extends "Admin/layout.njk" %}
 
 {% block content %}
-  <div class="main">
-    <div class="header-title">
-      <h1>Gerenciar Receitas</h1>
-      <a href="recipes/create" class="button">Nova Receita</a>
-    </div>
-    {% if not recipes %}
-    <div class="cards">
-      {% for recipe in recipes %}
-        <div class="card" id="{{recipe.index}}">
-          <div>
-            <img src="{{recipe.image}}" alt="{{recipe.title}}" srcset="">
-          </div>
-          <div>
-            <h2>{{recipe.title}}</h2>
-            <p class="autor">por
-              {{recipe.chef_name}}</p>
-            <a href="recipes/{{recipe.id}}">Visualizar</a>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-    {% else %}
-      <p>Sem receitas</p>
-    {% endif %}
+<div class="main">
+  <div class="header-title">
+    <h1>Gerenciar Receitas</h1>
+    <a href="recipes/create" class="button">Nova Receita</a>
   </div>
+  {% if not recipes %}
+  <p>Sem receitas</p>
+  {% else %}
+  <div class="cards">
+    {% for recipe in recipes %}
+    <div class="card" id="{{recipe.index}}">
+      <div>
+        <img src="{{recipe.image.src}}" alt="{{recipe.title}}" srcset="">
+      </div>
+      <div>
+        <h2>{{recipe.title}}</h2>
+        <p class="autor">por
+          {{recipe.chef_name}}</p>
+        <a href="recipes/{{recipe.id}}">Visualizar</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
 {% endblock content %}

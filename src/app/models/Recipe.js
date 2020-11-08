@@ -24,7 +24,7 @@ module.exports = {
     return db.query(query);
   },
 
-  all(filter, callback) {
+  all(filter) {
     let query = `SELECT recipes.*, chefs.name AS chef_name 
                    FROM recipes
                    LEFT JOIN chefs
@@ -33,10 +33,17 @@ module.exports = {
       query = `${query}
               WHERE recipes.title ILIKE '%${filter}%'`;
     }
-    db.query(query, (err, results) => {
-      if (err) throw `Database Error! ${err}`;
-      return callback(results.rows);
-    });
+    return db.query(query);
+  },
+
+  getImageRecipe(recipe_id) {
+    let query = `SELECT recipes_files.*, files.path
+                  FROM recipes_files
+                  LEFT JOIN files
+                  ON recipes_files.file_id = files.id
+                  WHERE recipes_files.recipe_id = $1
+                  LIMIT 1`;
+    return db.query(query, [recipe_id]);
   },
 
   getById(id) {
@@ -83,15 +90,17 @@ module.exports = {
     });
   },
 
-  allWithPagination(filter, page = 1, limit, callback) {
+  allWithPagination(filter, page = 1, limit) {
     let offset = limit * (page - 1);
 
-    let query = `SELECT recipes.*, chefs.name AS chef_name, (SELECT count(*) FROM recipes) AS total
+    let query = `SELECT recipes.*, chefs.name AS chef_name, 
+    (SELECT count(*) FROM recipes) AS total
     FROM recipes
     LEFT JOIN chefs
     ON recipes.chef_id = chefs.id`;
     if (filter) {
-      query = `SELECT recipes.*, chefs.name AS chef_name, (SELECT count(*) FROM recipes  WHERE recipes.title ILIKE '%${filter}%') AS total
+      query = `SELECT recipes.*, chefs.name AS chef_name, 
+      (SELECT count(*) FROM recipes  WHERE recipes.title ILIKE '%${filter}%') AS total
       FROM recipes
       LEFT JOIN chefs
       ON recipes.chef_id = chefs.id
@@ -100,12 +109,6 @@ module.exports = {
     query = `${query}
              OFFSET $1
              LIMIT $2`
-    db.query(query, [offset, limit], (err, results) => {
-      if (err) throw `Database Error! ${err}`;
-
-      return callback(results.rows);
-    });
+    return db.query(query, [offset, limit]);
   },
-
-
 }

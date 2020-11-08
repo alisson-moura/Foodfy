@@ -6,11 +6,31 @@ const { objectIsValid } = require('../../../lib/checkData');
 const { createArrayFromStringPG } = require('../../../lib/createArrayFromString');
 
 
-exports.index = (req, res) => {
+exports.index = async (req, res) => {
   const { search } = req.query;
-  Recipe.all(search, function (recipes) {
-    return res.render('Admin/index', { recipes });
+
+  let results = await Recipe.all(search);
+  let recipes = results.rows;
+
+  let recipesImagePromise = recipes.map(recipe => Recipe.getImageRecipe(recipe.id));
+  results = await Promise.all(recipesImagePromise);
+  let recipeImages = results.map(result => result.rows[0]);
+  recipeImages = recipeImages.map(recipeImage => {
+    return recipeImage = {
+      ...recipeImage,
+      src: `${req.protocol}://${req.headers.host}${recipeImage.path.replace("public", "")}`
+    }
   });
+
+  recipes = recipes.map(recipe => {
+    recipe = {
+      ...recipe,
+      image: recipeImages.find(recipeImage => recipeImage.recipe_id == recipe.id),
+    };
+    return recipe;
+  });
+
+  return res.render('Admin/index', { recipes });
 }
 
 exports.create = async (req, res) => {
@@ -127,27 +147,27 @@ exports.put = async (req, res) => {
       const removedFiles = req.body.removed_files.split(',');
       const lastIndex = removedFiles.length - 1;
       removedFiles.splice(lastIndex, 1);
-  
-  
+
+
       const removeRecipesFilesPromise = removedFiles.map(id => RecipeFiles.delete(id));
       const removedFilesPromise = removedFiles.map(id => File.delete(id));
       await Promise.all(removeRecipesFilesPromise);
       await Promise.all(removedFilesPromise);
     }
-  
+
     if (req.files.length != 0) {
       const filesPromise = req.files.map(async file => {
         let result = await File.create({ name: file.filename, path: file.path })
         return result.rows[0];
       });
-  
+
       let results = await Promise.all(filesPromise);
       let files_id = results.map(result => result.id);
-  
+
       const recipeFilesPromise = files_id.map(file => RecipeFiles.create(file, req.body.id));
       await Promise.all(recipeFilesPromise);
     }
-  
+
     await Recipe.update(data);
     return res.redirect(`/Admin/recipes/${req.body.id}`);
   } catch (error) {
