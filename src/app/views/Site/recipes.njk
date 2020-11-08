@@ -19,7 +19,7 @@
         {% for recipe in recipes %}
           <div class="card" id="{{recipe.id}}">
             <a href="/recipes/{{recipe.id}}">
-              <img src="{{recipe.image}}" alt="{{recipe.title}}" srcset="">
+              <img src="{{recipe.image.src}}" alt="{{recipe.title}}" srcset="">
               <h2>{{recipe.title}}</h2>
               <p class="autor">por
                 {{recipe.chef_name}}</p>
