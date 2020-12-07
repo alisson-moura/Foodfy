@@ -1,0 +1,22 @@
+{% extends "Admin/Session/layout.njk" %}
+
+{% block content %}
+<div class="main">
+    <form action="/accounts/login" method="post" class="form-login">
+        <h1 class="title">Iniciar Sessão</h1>
+        <div class="field">
+            <label>E-mail</label>
+            <input type="text" placeholder="Digite seu e-mail" name="email">
+        </div>
+        <div class="field">
+            <label>Senha</label>
+            <input type="text" placeholder="••••••" name="password">
+        </div>
+        <div class="buttonsForm">
+            <a href="/accounts/forgot">Esqueceu sua senha?</a>
+            <button type="submit">Acessar</button>
+        </div>
+
+    </form>
+</div>
+{% endblock content %}
