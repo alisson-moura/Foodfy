@@ -8,7 +8,7 @@ CREATE TABLE "users" (
   "reset_token" text,
   "reset_token_expires" text,
   "is_admin" boolean default false,
-  "file_id" int NOT NULL,
+  "file_id" int,
   "created_at" timestamp DEFAULT (now()),
   "updated_at" timestamp DEFAULT (now())
 );
