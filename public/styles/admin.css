@@ -29,6 +29,12 @@ header {
   display: flex;
   align-items: center;
 }
+.nav .button-exit {
+margin-left: auto;
+text-decoration: none;
+color: white;
+font-weight: bold;
+}
 .main {
   margin: 50px auto;
   max-width: 940px;

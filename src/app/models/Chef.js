@@ -2,13 +2,15 @@ const db = require('../../config/database');
 
 module.exports = {
   create(data, callback) {
-    const query = `INSERT INTO chefs (name, file_id, description)
-                   VALUES ($1, $2, $3)
+    const query = `INSERT INTO chefs (name, email, file_id, description, password)
+                   VALUES ($1, $2, $3, $4, $5)
                    RETURNING id`;
     const values = [
       data.name,
+      data.email,
       data.file_id,
       data.description,
+      '123456'
     ];
 
     db.query(query, values, (err, results) => {
@@ -20,7 +22,7 @@ module.exports = {
   async getChefByEmail(email) {
     const query = `SELECT * FROM chefs WHERE email = $1`;
     let results = await db.query(query, [email]);
-    return results.rows;
+    return results.rows[0];
   },
   all() {
     const query = `SELECT chefs.*, count(recipes.id) AS total

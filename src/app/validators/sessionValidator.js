@@ -5,16 +5,23 @@ async function login(req, res, next) {
     const { email, password } = req.body;
 
     const chef = await Chef.getChefByEmail(email);
-    if (chef.length != 0) {
-        console.log(chef);
-        next();
+    if (chef) {
+        req.session.chef = chef;
     }
 
     const user = await User.getAdminByEmail(email);
-    if (user.length != 0) {
-        next();
+    if (user) {
+        req.session.user = user;
     }
-    return res.render('Admin/Session/login');
+
+    if (user.length == 0 && chef.length == 0) {
+        return res.render('Admin/Session/login', {
+            error: 'Usuário ou senha inválidos',
+            email: req.body
+        });
+    }
+
+    next();
 }
 
 module.exports = { login }
