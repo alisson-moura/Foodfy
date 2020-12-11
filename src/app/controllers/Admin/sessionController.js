@@ -3,7 +3,14 @@ module.exports = {
         return res.render('Admin/Session/login');
     },
     async login(req, res) {
-        const { email, password } = req.body;
-        return res.redirect('/admin');
+        const { user, chef } = req;
+       
+        if (user) {
+            req.session.userId = user.id;
+        } else {
+            req.session.chefId = chef.id;
+        }
+
+        return res.redirect('/admin/recipes');
     }
 }

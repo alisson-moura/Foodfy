@@ -6,15 +6,15 @@ async function login(req, res, next) {
 
     const chef = await Chef.getChefByEmail(email);
     if (chef) {
-        req.session.chef = chef;
+        req.chef = chef;
     }
 
     const user = await User.getAdminByEmail(email);
     if (user) {
-        req.session.user = user;
+        req.user = user;
     }
 
-    if (user.length == 0 && chef.length == 0) {
+    if (!user && !chef) {
         return res.render('Admin/Session/login', {
             error: 'Usuário ou senha inválidos',
             email: req.body

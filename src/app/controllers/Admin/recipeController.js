@@ -8,6 +8,7 @@ const { createArrayFromStringPG } = require('../../../lib/createArrayFromString'
 
 exports.index = async (req, res) => {
   const { search } = req.query;
+  const { userId, chefId } = req.session;
 
   let results = await Recipe.all(search);
   let recipes = results.rows;
@@ -30,7 +31,7 @@ exports.index = async (req, res) => {
     return recipe;
   });
 
-  return res.render('Admin/index', { recipes });
+  return res.render('Admin/index', { recipes, userId, chefId });
 }
 
 exports.create = async (req, res) => {
