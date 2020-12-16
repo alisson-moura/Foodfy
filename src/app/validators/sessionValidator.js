@@ -10,7 +10,7 @@ async function login(req, res, next) {
         const passwordCheck = await compare(password, chef.password);
         if (!passwordCheck) {
             return res.render('Admin/Session/login', {
-                error: 'Usuário ou senha inválidos',
+                error: 'Usuário ou senha inválidos!',
                 email: req.body
             });
         }
@@ -22,8 +22,8 @@ async function login(req, res, next) {
         const passwordCheck = await compare(password, user.password);
         if (!passwordCheck) {
             return res.render('Admin/Session/login', {
-                error: 'Usuário ou senha inválidos',
-                email: req.body
+                error: 'Usuário ou senha inválidos!',
+                email,
             });
         }
         req.user = user;
@@ -31,7 +31,7 @@ async function login(req, res, next) {
 
     if (!user && !chef) {
         return res.render('Admin/Session/login', {
-            error: 'Usuário ou senha inválidos',
+            error: 'Usuário ou senha inválidos!',
             email: req.body
         });
     }
