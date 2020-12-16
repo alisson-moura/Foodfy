@@ -10,7 +10,7 @@ module.exports = {
       data.email,
       data.file_id,
       data.description,
-      '123456'
+      data.password
     ];
 
     db.query(query, values, (err, results) => {

@@ -1,6 +1,8 @@
+const { hash } = require('bcryptjs');
 const Chef = require('../../models/Chef');
 const File = require('../../models/File');
 const { objectIsValid } = require('../../../lib/checkData');
+
 
 module.exports = {
   async index(req, res) {
@@ -31,6 +33,7 @@ module.exports = {
   async post(req, res) {
     let data = req.body;
     const { filename, path } = req.file;
+    console.log(req.file)
 
     if (!objectIsValid(data)) {
       return res.render('Admin/Chefs/create', { error: 'Por favor preencha os campos corretamente' });
@@ -43,6 +46,7 @@ module.exports = {
         ...data,
         file_id
       }
+      data.password = await hash(data.password, 8);
       Chef.create(data, (chef) => {
         return res.redirect('/admin/chefs');
       });
@@ -96,7 +100,7 @@ module.exports = {
     return res.render('Admin/Chefs/edit', { chef, file });
 
   },
-  
+
   async put(req, res) {
     let data = req.body;
     let file = req.file;
