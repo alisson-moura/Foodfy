@@ -1,7 +1,6 @@
 const express = require('express');
 const { upload } = require('../config/uploadFile');
 const sessionController = require('../app/middlewares/session');
-const adminValidator = require('../app/validators/adminValidator');
 const recipeController = require('../app/controllers/Admin/recipeController');
 const chefController = require('../app/controllers/Admin/chefController');
 
@@ -33,6 +32,6 @@ adminRoutes.get('/chefs/:id', chefController.show);
 adminRoutes.get('/chefs/:id/edit', sessionController.onlyChefs, chefController.edit);
 adminRoutes.put('/chefs', sessionController.onlyChefs, upload.single('avatar'), chefController.put);
 
-adminRoutes.delete("/chefs", sessionController.onlyChefs, chefController.delete);
+adminRoutes.delete("/chefs", sessionController.onlyAdmins, chefController.delete);
 
 module.exports = adminRoutes;
