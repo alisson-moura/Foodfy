@@ -1,5 +1,7 @@
 const express = require('express');
 const { upload } = require('../config/uploadFile');
+const sessionController = require('../app/middlewares/session');
+const adminValidator = require('../app/validators/adminValidator');
 const recipeController = require('../app/controllers/Admin/recipeController');
 const chefController = require('../app/controllers/Admin/chefController');
 
@@ -23,14 +25,14 @@ adminRoutes.delete("/recipes", recipeController.delete);
 //chefs
 adminRoutes.get('/chefs', chefController.index);
 
-adminRoutes.get('/chefs/create', chefController.create);
-adminRoutes.post('/chefs', upload.single('avatar'), chefController.post);
+adminRoutes.get('/chefs/create', sessionController.onlyAdmins, chefController.create);
+adminRoutes.post('/chefs', sessionController.onlyAdmins, upload.single('avatar'), chefController.post);
 
 adminRoutes.get('/chefs/:id', chefController.show);
 
-adminRoutes.get('/chefs/:id/edit', chefController.edit);
-adminRoutes.put('/chefs', upload.single('avatar'), chefController.put);
+adminRoutes.get('/chefs/:id/edit', sessionController.onlyChefs, chefController.edit);
+adminRoutes.put('/chefs', sessionController.onlyChefs, upload.single('avatar'), chefController.put);
 
-adminRoutes.delete("/chefs", chefController.delete);
+adminRoutes.delete("/chefs", sessionController.onlyChefs, chefController.delete);
 
 module.exports = adminRoutes;

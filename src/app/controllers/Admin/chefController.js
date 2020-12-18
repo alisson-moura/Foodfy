@@ -6,6 +6,7 @@ const { objectIsValid } = require('../../../lib/checkData');
 
 module.exports = {
   async index(req, res) {
+    const { userId } = req.session;
     try {
       let results = await Chef.all();
       let chefs = results.rows;
@@ -20,7 +21,7 @@ module.exports = {
         chefs[i].file = file;
       }
 
-      return res.render('Admin/Chefs/chefs', { chefs });
+      return res.render('Admin/Chefs/chefs', { chefs, userId });
     } catch (error) {
       console.log(error);
     }

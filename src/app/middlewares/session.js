@@ -1,12 +1,11 @@
 function onlyAdmins(req, res, next) {
-    if (!req.session.userId) return res.redirect('/accounts');
+    if (!req.session.userId) return res.redirect('/admin');
 
-    next();
+    return next();
 }
 
 function onlyChefs(req, res, next) {
-    if (!req.session.chefId || !req.session.userId) return res.redirect('/accounts');
-
+    if (!req.session.chefId && !req.session.userId) return res.redirect('/admin');
     next();
 }
 
